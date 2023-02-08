@@ -6,6 +6,7 @@ import { UserService } from 'src/user/user.service';
 import { User } from 'src/user/entities/user.entity';
 import { UserPayload } from './models/UserPayload';
 import { UserToken } from './models/UserToken';
+import { UnauthorizedError } from './errors/unauthorized.error';
 
 @Injectable()
 export class AuthService {
@@ -37,6 +38,6 @@ export class AuthService {
       if (isPasswordValid) return { ...user, password: undefined };
     }
 
-    throw new Error('Invalid email or password');
+    throw new UnauthorizedError('Invalid email or password');
   }
 }
