@@ -1,6 +1,7 @@
 import { User } from '../entities/user.entity';
 import {
   IsEmail,
+  IsNumber,
   IsString,
   Matches,
   MaxLength,
@@ -8,9 +9,16 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto extends User {
+  /**
+   * Email will be used to login to the system.
+   * @example email@mail.com
+   */
   @IsEmail()
   email: string;
 
+  /**
+   * Password will be used to login to the system.
+   */
   @IsString()
   @MinLength(4)
   @MaxLength(20)
@@ -19,6 +27,13 @@ export class CreateUserDto extends User {
   })
   password: string;
 
+  /**
+   * Name will be used to identify the user in the system.
+   * @example Lucas Eduardo
+   */
   @IsString()
   name: string;
+
+  @IsNumber()
+  age?: number;
 }
